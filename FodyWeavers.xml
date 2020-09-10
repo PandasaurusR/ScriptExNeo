@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+
+<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
+  <Costura>
+    <IncludeAssemblies>
+      Interop.WUApiLib
+      YamlDotNet
+      Microsoft.Win32.TaskScheduler
+      Microsoft.Win32.Registry
+      System.Security.AccessControl
+      System.Security.Principal.Windows
+    </IncludeAssemblies>
+  </Costura>
+  
+</Weavers>

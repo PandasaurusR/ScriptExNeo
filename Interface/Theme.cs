@@ -20,7 +20,9 @@ namespace ScriptExNeo.Interface {
         }
     }
 
-
+    /// <summary>
+    /// Set console window size to predetermined value
+    /// </summary>
     static class SetConsoleWindowSize {
         private const int width = 120;
         private const int height = 50;
@@ -30,7 +32,7 @@ namespace ScriptExNeo.Interface {
                 Console.SetWindowSize(width, height);
             }
             catch (Exception) {
-                Program.Log.Add("!! FAILED TO SET CONSOLE WINDOW SIZE");
+                Program.Log.Add("* FAILED TO SET CONSOLE WINDOW SIZE *");
             }
         }
     }
