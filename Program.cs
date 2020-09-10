@@ -18,6 +18,7 @@ namespace ScriptExNeo {
 
         // Program properties
         public static string Version = "20.09.10";
+        public static string Copyright = "Haohan Liu (c) 2020";
         public static string Name = "ScriptExNeo";
         public static string MOTD = "Well would you look at that!";
 
