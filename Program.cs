@@ -79,7 +79,6 @@ namespace ScriptExNeo {
                 Program.Log.Dump(Program.LogFile);
             }
 
-
             Console.WriteLine('\n' + new String('=', 119));
             Console.WriteLine("PROGRAM HAS TERMINATED UNEXPECTEDLY. STACKTRACE IS BELOW.");
             Console.WriteLine(new String('=', 119));

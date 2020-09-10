@@ -15,6 +15,8 @@ namespace ScriptExNeo.Interface {
         public static string Input { get; set; }
 
         public static void Start() {
+            // Apply theme
+            Theme.Apply();
 
             // Begin terminal input output loop
             while (true) {
