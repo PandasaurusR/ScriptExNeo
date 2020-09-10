@@ -1,0 +1,16 @@
+# To learn more about .editorconfig see https://aka.ms/editorconfigdocs
+
+# All files
+[*]
+indent_style = space
+# https://marketplace.visualstudio.com/items?itemName=PaulHarrington.EditorGuidelines
+guidelines = 80, 120
+guidelines_style = 1px dotted 888888
+
+# Xml files
+[*.xml]
+indent_size = 2
+
+[*.cs]
+# IDE1006: Naming Styles
+dotnet_diagnostic.IDE1006.severity = silent

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ScriptExNeo.Interface;
+using ScriptExNeo.Logging;
+
 
 /// <summary>
 /// ScriptExNeo - System Integration Assistant
@@ -22,6 +25,10 @@ namespace ScriptExNeo {
         public static string ConfigFile = "AppConfig.yml";
         public static object Config = null;
 
+        // Program logging
+        public static string LogFile = "ScriptExNeo.log";
+        public static Log Log = new Log();
+
         static void Main(string[] args) {
             // Initialise crash handler
             CrashHandler.Inject();
@@ -39,7 +46,9 @@ namespace ScriptExNeo {
         /// Initialise the program
         /// </summary>
         private static void Start() {
-
+            Log.Add("*** PROGRAM INITIALISATION ***");
+            Terminal.Start();
+            throw new Exception();
         }
     }
 
@@ -63,6 +72,14 @@ namespace ScriptExNeo {
         /// Report unexpected exception to console
         /// </summary>
         private static void ReportUnhandledException(object sender, UnhandledExceptionEventArgs e) {
+            if (Program.Log != null) {
+                Program.Log.Add("*** UNHANDLED EXCEPTION ***");
+                Program.Log.Add(e.ExceptionObject.ToString());
+                Program.Log.Add("*** PROGRAM TERMINATED ***");
+                Program.Log.Dump(Program.LogFile);
+            }
+
+
             Console.WriteLine('\n' + new String('=', 119));
             Console.WriteLine("PROGRAM HAS TERMINATED UNEXPECTEDLY. STACKTRACE IS BELOW.");
             Console.WriteLine(new String('=', 119));
