@@ -1,0 +1,485 @@
+﻿# Configuration file for ScriptExNeo - System Integration Assistant
+#
+# Written by Haohan Liu (c) 2020
+#
+# This file contains all the vital information required
+# for the program to operate. It is written in YAML,
+# see: https://yaml.org/refcard.html
+#
+# The program is highly extensible without the need for 
+# recompilation, however this file must be valid YAML
+# that follows the style laid out below. 
+
+---
+################################################################################
+# PROGRAM PARAMETERS --- The settinmgs for most functionality
+################################################################################
+Program:
+
+    ############################################################################
+    # ROBOCOPY PARAMETERS --- Where the files located
+    ############################################################################
+    # Local storage device parameters. Where is the software on your drive?
+    SrcDriveName: SAMSUNG USB
+    SrcDriveType: Removable
+    SrcDriveRoot: ~
+
+    # Network storage device parameters. Where is the software on the network?
+    SrcUseNetwork: true
+    SrcNetworkRoot: "\\\\cache\\Public"
+
+    # Destination of copied files on the local system
+    DstDriveRoot: "%USERPROFILE%\\Desktop"
+
+    # Debugging parameters. Used as a fallback if IO devices cannot be read.
+    ForceSrcDriveLetter: false
+    SrcDriveLetter: D
+
+
+    ############################################################################
+    # STARTUP PARAMETERS --- What the program does on startup
+    ############################################################################
+    Startup:
+        - Startup.SetPerformanceMode true
+        - Startup.AutoWinUpdate true
+        - Startup.EnableAutoStart true
+        - Startup.RunSystemCheck true
+        - Startup.DisableConsoleQuickEdit true
+
+
+    ############################################################################
+    # COMMAND BEHAVIOUR --- How are commands processed and run
+    ############################################################################
+    # If true, program will ignore invalid commands and run valid commands.
+    # If false, program will ignore entire command and await valid input.
+    SkipInvalidCommands: false
+
+    # Time (milliseconds) between async command execution.
+    CommandExecutionDelay: 500
+
+
+    ############################################################################
+    # TERMINAL BINDINGS --- Special character functions
+    ############################################################################
+    # Key to initiate internal program functions
+    InvokeKey: "/"
+
+    # Key to switch between program modes
+    ModeKey: "!"
+
+    # Key to show mode commands
+    HelpKey: "?"
+
+    # Key to split multiple commands into batches
+    BatchKey: "|"
+
+    # Directory of modes configured. Mode functionality is further below.
+    Modes:
+        s: Software
+        t: Testing
+        u: Utility
+        q: QC
+
+    DefaultMode: s
+
+
+################################################################################
+# MACROS --- Shortcuts to common commands
+################################################################################
+Macros:
+    F:
+        Name: Prime + Furmark
+        SetMode: t
+        Command: p f m
+    G: 
+        Name: Standard Testing
+        SetMode: t
+        Command: f25 a m | s
+    Q:
+        Name: Open QC Windows
+        SetMode: q
+        Command: dv ds sw e u
+
+
+################################################################################
+# MODES --- Configure all the program commands
+################################################################################
+Modes:
+
+    ############################################################################
+    # SOFTWARE MODE --- Commands for installing software and drivers
+    ############################################################################
+    Software:
+        SrcCopy: true
+        SrcLocal: SOFTWARE
+        DstLocal: Software
+        SrcNetwork: SI Software
+
+        Categories:
+            - driver
+            - lighting
+
+        Commands:
+            # Hardware Drivers
+            nv:
+                Name: NVIDIA GPU Driver
+                Category: driver
+                Exec: setup.exe
+                Args: -noreboot -nosplash
+                SrcPath: _NVIDIA GPU
+                NetPath: Nvidia
+                Delay: 0
+                IgnoreBatch: false
+            na:
+                Name: NVIDIA GPU Auto Installer
+                Category: driver
+                Exec: NV_INSTALL.exe
+                Args: ~
+                SrcPath: _NVIDIA AUTO
+                NetPath: Nvidia Auto
+                Delay: 0
+                IgnoreBatch: false
+            amd:
+                Name: AMD GPU Driver
+                Category: driver
+                Exec: Setup.exe
+                Args: ~
+                SrcPath: _AMD GPU
+                NetPath: AMD
+                Delay: 0
+                IgnoreBatch: false
+            amds:
+                Name: AMD GPU Driver (silent)
+                Category: driver
+                Exec: Setup.exe
+                Args: -INSTALL
+                SrcPath: _AMD GPU
+                NetPath: AMD
+                Delay: 0
+                IgnoreBatch: false
+            amc:
+                Name: AMD Chipset Driver
+                Category: driver
+                Exec: "*.exe"
+                Args: ~
+                SrcPath: _AMD Chipset
+                NetPath: AMD Chipset
+                Delay: 0
+                IgnoreBatch: false
+            ig:
+                Name: Intel iGPU Driver
+                Category: driver
+                Exec: igxpin.exe
+                Args: -s -overwrite
+                SrcPath: _INTEL iGPU
+                NetPath: Intel
+                Delay: 0
+                IgnoreBatch: false
+    
+            # Lighting Software
+            aw:
+                Name: AMD Wraith Prism (manual)
+                Category: lighting
+                Exec: Setup.exe
+                Args: ~
+                SrcPath: AMD Wraith Prism
+                NetPath: Wraith Prism
+                Delay: 0
+                IgnoreBatch: false
+            au:
+                Name: ASUS Aura
+                Category: lighting
+                Exec: AsusSetup.exe
+                Args: /s /SMS
+                SrcPath: ASUS Aura
+                NetPath: Aura
+                Delay: 0
+                IgnoreBatch: false
+            ac:
+                Name: ASUS Armory Crate
+                Category: lighting
+                Exec: "*.exe"
+                Args: ~
+                SrcPath: ASUS Armory Crate
+                NetPath: Armory Crate
+                Delay: 0
+                IgnoreBatch: false
+            cm:
+                Name: CM MasterPlus
+                Category: lighting
+                Exec: "*.exe"
+                Args: /SILENT /NORESTART /SP-
+                SrcPath: CM MasterPlus
+                NetPath: MasterPlus
+                Delay: 0
+                IgnoreBatch: false
+            tb:
+                Name: TEAM Blitz
+                Category: lighting
+                Exec: Setup.exe
+                Args: /s /SMS
+                SrcPath: TEAM Blitz
+                NetPath: Blitz
+                Delay: 0
+                IgnoreBatch: false
+            ci:
+                Name: CORSAIR iCUE
+                Category: lighting
+                Exec: "*.msi"
+                Args: /qb
+                SrcPath: CORSAIR iCUE
+                NetPath: iCUE
+                Delay: 0
+                IgnoreBatch: false
+            mm:
+                Name: MSI Mystic Light
+                Category: lighting
+                Exec: "*.exe"
+                Args: /SILENT /NORESTART /SP- 
+                SrcPath: MSI Mystic Light
+                NetPath: Mystic Light
+                Delay: 0
+                IgnoreBatch: false
+            md2:
+                Name: MSI Dragon Center v2
+                Category: lighting
+                Exec: "*.exe"
+                Args: /SILENT /NORESTART /SP- 
+                SrcPath: MSI Dragon Center 2
+                NetPath: Dragon Center
+                Delay: 0
+                IgnoreBatch: false
+            nc:
+                Name: NZXT CAM
+                Category: lighting
+                Exec: "*.exe"
+                Args: ~ 
+                SrcPath: NZXT CAM
+                NetPath: CAM
+                Delay: 0
+                IgnoreBatch: false
+            gr:
+                Name: GIGABYTE RGBFusion
+                Category: lighting
+                Exec: "*.exe"
+                Args: ~
+                SrcPath: GIGABYTE RGBFusion
+                NetPath: RGB Fusion
+                Delay: 0
+                IgnoreBatch: false
+
+
+    ############################################################################
+    # TESTING MODE --- Commands for benchmarking and stress testing
+    ############################################################################
+    Testing:
+        SrcCopy: false
+        SrcLocal: AAA Testing
+        DstLocal: AAA Testing
+        SrcNetwork: ~
+
+        Categories:
+            - cpu + ram
+            - gpu
+            - other
+
+        Commands:
+            p:
+                Name: Prime95 (Blend)
+                Category: cpu + ram
+                Exec: prime95.exe
+                Args: -t
+                SrcPath: Benchmark
+                Delay: 5000
+                IgnoreBatch: false
+            f:
+                Name: Furmark (inf)
+                Category: gpu
+                Exec: FurMark.exe
+                Args: /nogui /msaa=8 /width=1280 height=720 /xtreme_burning
+                SrcPath: Benchmark
+                Delay: 0
+                IgnoreBatch: false
+            f15:
+                Name: Furmark (15 min)
+                Category: gpu
+                Exec: FurMark.exe
+                Args: /nogui /msaa=8 /width=1280 height=720 /max_time=900000 /xtreme_burning
+                SrcPath: Benchmark
+                Delay: 0
+                IgnoreBatch: false
+            f25:
+                Name: Furmark (25 min)
+                Category: gpu
+                Exec: FurMark.exe
+                Args: /nogui /msaa=8 /width=1280 height=720 /max_time=1500000 /xtreme_burning
+                SrcPath: Benchmark
+                Delay: 0
+                IgnoreBatch: false
+            a:
+                Name: AIDA64 Stability Test (inf)
+                Category: cpu + ram
+                Exec: aida64.exe
+                Args: /SST CPU,FPU,Cache,RAM
+                SrcPath: AIDA64
+                Delay: 0
+                IgnoreBatch: false
+            a15:
+                Name: AIDA64 Stability Test (15 min)
+                Category: cpu + ram
+                Exec: aida64.exe
+                Args: /SST CPU,FPU,Cache,RAM /SSTDUR 15
+                SrcPath: AIDA64
+                Delay: 0
+                IgnoreBatch: false
+            a25:
+                Name: AIDA64 Stability Test (25 min)
+                Category: cpu + ram
+                Exec: aida64.exe
+                Args: /SST CPU,FPU,Cache,RAM /SSTDUR 25
+                SrcPath: AIDA64
+                Delay: 0
+                IgnoreBatch: false
+            m:
+                Name: HWMonitor
+                Category: other
+                Exec: HWMonitor_x64.exe
+                Args: ~
+                SrcPath: Benchmark
+                Delay: 0
+                IgnoreBatch: true
+            s:
+                Name: Superposition
+                Category: gpu
+                Exec: launcher.exe
+                Args: ~
+                SrcPath: Benchmark\Superposition\bin
+                Delay: 0
+                IgnoreBatch: false
+            h:
+                Name: Heaven
+                Category: gpu
+                Exec: heaven_modified.bat
+                Args: ~
+                SrcPath: Benchmark\Heaven
+                Delay: 0
+                IgnoreBatch: false
+            i:
+                Name: Intel Burn Test V2
+                Category: cpu + ram
+                Exec: IntelBurnTestV2.exe
+                Args: ~
+                SrcPath: "IBT\\IntelBurnTestV2.New"
+                Delay: 0
+                IgnoreBatch: false
+
+
+    ############################################################################
+    # QC MODE --- Commands for quality control validation
+    ############################################################################
+    QC:
+        SrcCopy: false
+        SrcLocal: AAA Testing
+        DstLocal: AAA Testing
+        SrcNetwork: ~
+            
+        Commands:
+            t:
+                Name: Task Manager
+                Exec: Task Manager.lnk
+                Args: ~
+                SrcPath: QC
+                Delay: 0
+                IgnoreBatch: false
+            dv:
+                Name: Device Manager
+                Exec: devmgmt.msc.lnk
+                Args: ~
+                SrcPath: QC
+                Delay: 0
+                IgnoreBatch: false
+            ds:
+                Name: Disk Management
+                Exec: diskmgmt.msc.lnk
+                Args: ~
+                SrcPath: QC
+                Delay: 0
+                IgnoreBatch: false
+            sd:
+                Name: Sound Devices
+                Exec: mmsys.cpl.lnk
+                Args: ~
+                SrcPath: QC
+                Delay: 0
+                IgnoreBatch: false
+            a:
+                Name: Windows Activation
+                Exec: msactivate.url
+                Args: ~
+                SrcPath: QC
+                Delay: 0
+                IgnoreBatch: false
+            sw:
+                Name: System Window (PC Summary)
+                Exec: controlsys.lnk
+                Args: ~
+                SrcPath: QC
+                Delay: 0
+                IgnoreBatch: false
+            u:
+                Name: Windows Update
+                Exec: msupdate.url
+                Args: ~
+                SrcPath: QC
+                Delay: 2500
+                IgnoreBatch: false
+            e:
+                Name: Windows Explorer
+                Exec: explorer.lnk
+                Args: ~
+                SrcPath: QC
+                Delay: 0
+                IgnoreBatch: false
+
+
+    ############################################################################
+    # UTILITY MODE --- Commands for other system utilities
+    ############################################################################
+    Utility:
+        SrcCopy: true
+        SrcLocal: UTILITIES
+        DstLocal: Utilities
+        SrcNetwork: ~
+
+        Commands:
+            r:
+                Name: Revo Uninstaller
+                Exec: RevoUPPort.exe
+                Args: ~
+                SrcPath: Revo Uninstaller
+                Delay: 0
+                IgnoreBatch: true
+            d:
+                Name: DDU (Manual)
+                Exec: "*.exe"
+                Args: ~
+                SrcPath: DDU
+                Delay: 0
+                IgnoreBatch: false
+            dn:
+                Name: DDU (NVIDIA)
+                Exec: DDU_NV.bat
+                Args: ~
+                SrcPath: DDU
+                Delay: 0
+                IgnoreBatch: false
+            da:
+                Name: DDU (AMD)
+                Exec: DDU_AMD.bat
+                Args: ~
+                SrcPath: DDU
+                Delay: 0
+                IgnoreBatch: false
+
+
+...

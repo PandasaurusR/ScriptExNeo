@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ScriptExNeo.Interface;
+using ScriptExNeo.Interface.Page;
 using ScriptExNeo.Logging;
 using ScriptExNeo.Assets;
-using System.Drawing.Printing;
-using ScriptExNeo.Interface.Page;
+using ScriptExNeo.Configuration;
 
 /// <summary>
 /// ScriptExNeo - System Integration Assistant
@@ -26,7 +26,7 @@ namespace ScriptExNeo {
 
         // Program configuration
         public static string ConfigFile = "AppConfig.yml";
-        public static object Config = null;
+        public static Config Config = null;
 
         // Program logging
         public static string LogFile = "ScriptExNeo.log";
@@ -51,6 +51,8 @@ namespace ScriptExNeo {
         /// </summary>
         private static void Start() {
             Log.Add("*** PROGRAM INITIALISATION ***");
+
+            Config = Deserializer.Deserialize(ConfigFile);
 
             TitlePage.Display();
 

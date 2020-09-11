@@ -120,6 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Asset.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Configuration\Config.cs" />
+    <Compile Include="Configuration\Deserializer.cs" />
     <Compile Include="Interface\Page\TitlePage.cs" />
     <Compile Include="Interface\Theme.cs" />
     <Compile Include="Logging\Log.cs" />
@@ -135,6 +138,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Assets\Raw\CrashText.txt" />
     <EmbeddedResource Include="Assets\Raw\TitleSplash.txt" />
+    <None Include="AppConfig.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="FodyWeavers.xml" />
     <Content Include="_Icon\Icon.ico" />
   </ItemGroup>
