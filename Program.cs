@@ -37,6 +37,7 @@ namespace ScriptExNeo {
             // Handle CLI execution
             if (args.Length > 0) {
                 Console.WriteLine($"ScriptExNeo [{Version}] does not currently support CLI operations.");
+                Environment.Exit(1);
             }
 
             // Handle typical execution
@@ -49,7 +50,6 @@ namespace ScriptExNeo {
         private static void Start() {
             Log.Add("*** PROGRAM INITIALISATION ***");
             Terminal.Start();
-            throw new Exception();
         }
     }
 

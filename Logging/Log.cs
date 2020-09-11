@@ -24,7 +24,7 @@ namespace ScriptExNeo.Logging {
         public void Add(string log) {
             string _time = $"[{DateTime.Now.ToLongTimeString()}] ";
 
-            Content.Add(_time + log);
+            Content.Add(_time + log.Trim('\n'));
         }
 
         /// <summary>
