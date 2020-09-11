@@ -28,13 +28,14 @@ namespace ScriptExNeo.Logging {
         }
 
         /// <summary>
-        /// Dump log into file
+        /// Dump log into file, reset in-memory log storage
         /// </summary>
         /// <param name="filename"></param>
         public void Dump(string filename) {
             using (StreamWriter w = File.AppendText(filename)) {
                 w.WriteLine(this.ToString());
             }
+            Content = new List<string>();
         }
 
         /// <summary>
