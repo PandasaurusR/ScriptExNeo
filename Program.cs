@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using ScriptExNeo.Interface;
 using ScriptExNeo.Logging;
 using ScriptExNeo.Assets;
-
+using System.Drawing.Printing;
+using ScriptExNeo.Interface.Page;
 
 /// <summary>
 /// ScriptExNeo - System Integration Assistant
@@ -50,6 +51,9 @@ namespace ScriptExNeo {
         /// </summary>
         private static void Start() {
             Log.Add("*** PROGRAM INITIALISATION ***");
+
+            TitlePage.Display();
+
             Terminal.Start();
         }
     }

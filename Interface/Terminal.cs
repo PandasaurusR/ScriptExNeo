@@ -32,13 +32,6 @@ namespace ScriptExNeo.Interface {
             // Begin terminal input output loop
             while (true) {
                 ReadInput();
-
-                WriteError(Input);
-                WriteAlert(Input);
-                WriteInfo(Input);
-                WriteLine(Input);
-
-                Console.WriteLine(Program.Log.ToString());
             }
         }
 
@@ -59,26 +52,53 @@ namespace ScriptExNeo.Interface {
 
         #region # Terminal Output
         
-        static void Write(string message, string prefix) {
-            Console.Write($"[{prefix}] {message}");
-            Program.Log.Add($"=> [{prefix}] {message}");
+        // LINE OUTPUT
+        public static void Write(string text) {
+            Console.Write(text);
         }
 
-        public static void WriteError(string message) {
-            Terminal.Write(message + '\n', "!");
+        static void Write(string text, string prefix) {
+            Console.Write($"[{prefix}] {text}");
+            Program.Log.Add($"=> [{prefix}] {text}");
         }
 
-        public static void WriteAlert(string message) {
-            Terminal.Write(message + '\n', "?");
+        public static void WriteError(string text) {
+            Terminal.Write(text + '\n', "!");
         }
 
-        public static void WriteInfo(string message) {
-            Terminal.Write(message + '\n', "-");
+        public static void WriteAlert(string text) {
+            Terminal.Write(text + '\n', "?");
         }
 
-        public static void WriteLine(string message) {
-            Terminal.Write(message + '\n', "*");
+        public static void WriteInfo(string text) {
+            Terminal.Write(text + '\n', "-");
         }
+
+        public static void WriteLine(string text) {
+            Terminal.Write(text + '\n', "*");
+        }
+
+        // SPECIFIC OUTPUT
+
+        /// <summary>
+        /// Write text at specific console coordinate offsets.
+        /// </summary>
+        public static void WriteAt(int x, int y, string text) {
+            // Store initial cursor position
+            int _x = Console.CursorLeft;
+            int _y = Console.CursorTop;
+
+            // Write text block
+            foreach (string line in text.Split('\n')) {
+                Console.SetCursorPosition(x, y);
+                Console.Write(line);
+                y += 1;
+            }
+
+            // Reset cursor position
+            Console.SetCursorPosition(_x, _y);
+        }
+
 
         #endregion
     }
