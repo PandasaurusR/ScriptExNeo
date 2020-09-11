@@ -77,7 +77,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>_Assets\Icon.ico</ApplicationIcon>
+    <ApplicationIcon>_Icon\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ScriptExNeo.Program</StartupObject>
@@ -119,6 +119,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Asset.cs" />
+    <Compile Include="Interface\Page\TitlePage.cs" />
     <Compile Include="Interface\Theme.cs" />
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Program.cs" />
@@ -131,8 +133,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\Raw\CrashText.txt" />
+    <EmbeddedResource Include="Assets\Raw\TitleSplash.txt" />
     <Content Include="FodyWeavers.xml" />
-    <Content Include="_Assets\Icon.ico" />
+    <Content Include="_Icon\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -157,6 +161,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

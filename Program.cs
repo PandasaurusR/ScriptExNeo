@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ScriptExNeo.Interface;
 using ScriptExNeo.Logging;
+using ScriptExNeo.Assets;
 
 
 /// <summary>
@@ -67,6 +68,9 @@ namespace ScriptExNeo {
             if (!System.Diagnostics.Debugger.IsAttached) {
                 AppDomain.CurrentDomain.UnhandledException += ReportUnhandledException;
             }
+            else {
+                Program.Log.Add("* PROGRAM HOOKED INTO EXTERNAL DEBUGGER *");
+            }
         }
 
         /// <summary>
@@ -81,11 +85,12 @@ namespace ScriptExNeo {
             }
 
             Console.WriteLine('\n' + new String('=', 119));
-            Console.WriteLine("PROGRAM HAS TERMINATED UNEXPECTEDLY. STACKTRACE IS BELOW.");
+            Console.WriteLine(Asset.CrashText);
             Console.WriteLine(new String('=', 119));
             Console.WriteLine(e.ExceptionObject.ToString());
+            Console.WriteLine(new String('-', 119));
             Console.WriteLine("Please press any key to end the program...");
-            Console.WriteLine(new String('=', 119));
+            Console.WriteLine(new String('-', 119));
             Console.ReadKey();
             Environment.Exit(1);
         }
