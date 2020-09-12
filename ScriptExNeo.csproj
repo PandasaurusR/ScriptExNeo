@@ -120,15 +120,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Asset.cs" />
-    <Compile Include="Commands\Command.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\Deserializer.cs" />
+    <Compile Include="Handlers\TerminalHandler.cs" />
+    <Compile Include="Handlers\ExceptionHandler.cs" />
     <Compile Include="Interface\Page\TitlePage.cs" />
     <Compile Include="Interface\Shelleton\Commands\DefaultCommands.cs" />
     <Compile Include="Interface\Shelleton\Shell.cs" />
     <Compile Include="Interface\Shelleton\ShellCommand.cs" />
     <Compile Include="Interface\Theme.cs" />
-    <Compile Include="Logging\Log.cs" />
+    <Compile Include="Tools\Debug.cs" />
+    <Compile Include="Tools\Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interface\Terminal.cs" />
