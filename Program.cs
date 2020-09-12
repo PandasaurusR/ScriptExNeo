@@ -27,7 +27,7 @@ namespace ScriptExNeo {
 
         // Program configuration
         public static string ConfigFile = "AppConfig.yml";
-        public static Config Config = null;
+        public static Config Config = Deserializer.Deserialize(ConfigFile);
 
         // Program logging
         public static string LogFile = "ScriptExNeo.log";
@@ -52,8 +52,6 @@ namespace ScriptExNeo {
         /// </summary>
         private static void Start() {
             Log.Add("*** PROGRAM INITIALISATION ***");
-
-            Config = Deserializer.Deserialize(ConfigFile);
 
             Shell.Initialise();
 

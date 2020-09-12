@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using YamlDotNet.Serialization;
 
 namespace ScriptExNeo.Configuration {
+
+    /// <summary>
+    /// Issue with configuration file
+    /// </summary>
+    public class BadConfigException : Exception {
+        public BadConfigException() { }
+        public BadConfigException(string message) : base(message) { }
+        public BadConfigException(string message, Exception inner) : base(message, inner) { }
+        protected BadConfigException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+    }
 
     /// <summary>
     /// Program configuration object
@@ -52,8 +60,8 @@ namespace ScriptExNeo.Configuration {
         public char BatchKey { get; set; }
 
         /// MODE DIRECTORY
-        public Dictionary<char, string> Modes { get; set; }
-        public char DefaultMode { get; set; }
+        public Dictionary<string, string> Modes { get; set; }
+        public string DefaultMode { get; set; }
     }
 
     /// <summary>
@@ -61,7 +69,7 @@ namespace ScriptExNeo.Configuration {
     /// </summary>
     public class MacroItem {
         public string Name { get; set; }
-        public char SetMode { get; set; }
+        public string SetMode { get; set; }
         public string Command { get; set; }
     }
 
