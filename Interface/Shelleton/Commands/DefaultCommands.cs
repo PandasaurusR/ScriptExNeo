@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YamlDotNet.Serialization;
+using ScriptExNeo.Tools;
 
 namespace ScriptExNeo.Interface.Shelleton.Commands {
     public static class DefaultCommands {
@@ -22,13 +22,8 @@ namespace ScriptExNeo.Interface.Shelleton.Commands {
         /// Serlialize loaded configuration and show
         /// </summary>
         public static void showconfig() {
-            // Serialize loaded configuration
-            var _s = new Serializer();
-            string _dump = _s.Serialize(Program.Config);
-
-            // Write to terminal
             Terminal.WriteLineBreak();
-            Terminal.Write(_dump);
+            Terminal.Write(Debug.Dump(Program.Config));
             Terminal.WriteLineBreak();
         }
 

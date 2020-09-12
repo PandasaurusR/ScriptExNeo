@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScriptExNeo.Logging {
+namespace ScriptExNeo.Tools {
 
     /// <summary>
     /// Provides logging functionality to the terminal

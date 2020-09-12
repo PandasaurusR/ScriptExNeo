@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using ScriptExNeo.Interface;
 using ScriptExNeo.Interface.Page;
 using ScriptExNeo.Interface.Shelleton;
-using ScriptExNeo.Logging;
+using ScriptExNeo.Tools;
 using ScriptExNeo.Assets;
 using ScriptExNeo.Configuration;
 
