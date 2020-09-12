@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using ScriptExNeo.Logging;
@@ -32,6 +33,7 @@ namespace ScriptExNeo.Interface {
             // Begin terminal input output loop
             while (true) {
                 ReadInput();
+                Shelleton.Shell.Run(Input);
             }
         }
 
@@ -97,6 +99,13 @@ namespace ScriptExNeo.Interface {
 
             // Reset cursor position
             Console.SetCursorPosition(_x, _y);
+        }
+
+        /// <summary>
+        /// Print horizontal line break with the character provided
+        /// </summary>
+        public static void WriteLineBreak(char c='-') {
+            Console.WriteLine(new String(c, 119));
         }
 
 

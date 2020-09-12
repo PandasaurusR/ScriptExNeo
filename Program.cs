@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ScriptExNeo.Interface;
 using ScriptExNeo.Interface.Page;
+using ScriptExNeo.Interface.Shelleton;
 using ScriptExNeo.Logging;
 using ScriptExNeo.Assets;
 using ScriptExNeo.Configuration;
@@ -53,6 +54,8 @@ namespace ScriptExNeo {
             Log.Add("*** PROGRAM INITIALISATION ***");
 
             Config = Deserializer.Deserialize(ConfigFile);
+
+            Shell.Initialise();
 
             TitlePage.Display();
 

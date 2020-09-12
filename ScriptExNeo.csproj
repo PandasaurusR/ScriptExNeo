@@ -124,6 +124,9 @@
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\Deserializer.cs" />
     <Compile Include="Interface\Page\TitlePage.cs" />
+    <Compile Include="Interface\Shelleton\Commands\DefaultCommands.cs" />
+    <Compile Include="Interface\Shelleton\Shell.cs" />
+    <Compile Include="Interface\Shelleton\ShellCommand.cs" />
     <Compile Include="Interface\Theme.cs" />
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Program.cs" />
