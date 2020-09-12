@@ -86,8 +86,6 @@ namespace ScriptExNeo {
             if (Program.Log != null) {
                 Program.Log.Add("*** UNHANDLED EXCEPTION ***");
                 Program.Log.Add(e.ExceptionObject.ToString());
-                Program.Log.Add("*** PROGRAM TERMINATED ***");
-                Program.Log.Dump(Program.LogFile);
             }
 
             Console.WriteLine('\n' + new String('=', 119));
@@ -98,7 +96,30 @@ namespace ScriptExNeo {
             Console.WriteLine("Please press any key to end the program...");
             Console.WriteLine(new String('-', 119));
             Console.ReadKey();
-            Environment.Exit(1);
+            CrashHandler.Exit(1);
+        }
+
+        /// <summary>
+        /// Report an exception and log details. Does not terminate program.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="message"></param>
+        public static void ReportException(Exception e, string message) {
+            if (Program.Log != null) {
+                Program.Log.Add($"** {message.ToUpper()} **");
+                Program.Log.Add(e.StackTrace);
+            }
+        }
+
+        /// <summary>
+        /// Terminate the program with code and dump log
+        /// </summary>
+        public static void Exit(int code) {
+            if (Program.Log != null) {
+                Program.Log.Add("*** PROGRAM TERMINATED ***");
+                Program.Log.Dump(Program.LogFile);
+            }
+            Environment.Exit(code);
         }
     }
 }
