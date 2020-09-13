@@ -41,7 +41,7 @@ namespace ScriptExNeo.Interface {
             // Begin terminal input output loop
             while (true) {
                 ReadInput();
-                Terminal.Write(Debug.Dump(Handler.ParseCommands(Input)));
+                Debug.WriteDump(Handler.ParseCommands(Input));
             }
         }
 

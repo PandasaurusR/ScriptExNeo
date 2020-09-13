@@ -20,5 +20,12 @@ namespace ScriptExNeo.Tools {
 
             return _dump;
         }
+
+        /// <summary>
+        /// Print dumped object
+        /// </summary>
+        public static void WriteDump(object _o) {
+            Console.WriteLine(Dump(_o));
+        }
     }
 }
