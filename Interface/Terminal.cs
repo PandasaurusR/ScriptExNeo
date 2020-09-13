@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ScriptExNeo.Handlers;
 using ScriptExNeo.Tools;
+using System;
 
 namespace ScriptExNeo.Interface {
 
@@ -25,15 +19,29 @@ namespace ScriptExNeo.Interface {
         /// </summary>
         public static bool IsAwaitingInput { get; set; }
 
-        public static void Start() {
-            // Initialise Terminal
-            Theme.Apply();
+        /// <summary>
+        /// Terminal functionality handler
+        /// </summary>
+        private static TerminalHandler Handler { get; set; }
+
+        /// <summary>
+        /// Static class constructor
+        /// </summary>
+        static Terminal() {
             IsAwaitingInput = false;
+            Theme.Apply();
+            Handler = new TerminalHandler(Program.Config);
+        }
+
+        /// <summary>
+        /// Entrypoint function to Terminal functionality
+        /// </summary>
+        public static void Start() {
 
             // Begin terminal input output loop
             while (true) {
                 ReadInput();
-                Shelleton.Shell.Run(Input);
+                Terminal.Write(Debug.Dump(Handler.ParseCommands(Input)));
             }
         }
 
@@ -57,11 +65,12 @@ namespace ScriptExNeo.Interface {
         // LINE OUTPUT
         public static void Write(string text) {
             Console.Write(text);
+            Program.Log.Add($"=> '{text}'");
         }
 
         static void Write(string text, string prefix) {
             Console.Write($"[{prefix}] {text}");
-            Program.Log.Add($"=> [{prefix}] {text}");
+            Program.Log.Add($"=> [{prefix}] '{text}'");
         }
 
         public static void WriteError(string text) {

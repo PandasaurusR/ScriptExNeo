@@ -44,7 +44,7 @@ namespace ScriptExNeo.Configuration {
 
         // Debug
         public bool ForceSrcDriveLetter { get; set; }
-        public char SrcDriveLetter { get; set; }
+        public string SrcDriveLetter { get; set; }
 
         /// STARTUP
         public List<string> Startup { get; set; }
@@ -54,10 +54,10 @@ namespace ScriptExNeo.Configuration {
         public int CommandExecutionDelay { get; set; }
 
         /// TERMINAL BINDINGS
-        public char InvokeKey { get; set; }
-        public char ModeKey { get; set; }
-        public char HelpKey { get; set; }
-        public char BatchKey { get; set; }
+        public string InvokeKey { get; set; }
+        public string ModeKey { get; set; }
+        public string HelpKey { get; set; }
+        public string BatchKey { get; set; }
 
         /// MODE DIRECTORY
         public Dictionary<string, string> Modes { get; set; }
