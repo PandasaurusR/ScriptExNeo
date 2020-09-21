@@ -7,7 +7,7 @@ namespace ScriptExNeo.Interface {
     /// <summary>
     /// Provides functionality to change terminal appearance
     /// </summary>
-    public static class Theme {
+    public static class TerminalTheme {
         public static void Apply() {
             SetConsoleTransparency.Apply();
             DisableConsoleQuickEdit.Apply();
