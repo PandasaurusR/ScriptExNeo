@@ -24,7 +24,7 @@ namespace ScriptExNeo.Interface {
         /// </summary>
         static Terminal() {
             IsAwaitingInput = false;
-            Theme.Apply();
+            TerminalTheme.Apply();
         }
 
         /// <summary>
