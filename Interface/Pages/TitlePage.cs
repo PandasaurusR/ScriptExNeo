@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ScriptExNeo.Assets;
 
-namespace ScriptExNeo.Interface.Page {
+namespace ScriptExNeo.Interface.Pages {
     public static class TitlePage {
         public static void Display() {
             Terminal.WriteAt(25, 1, Asset.TitleSplashText);

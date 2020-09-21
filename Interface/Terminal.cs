@@ -20,17 +20,11 @@ namespace ScriptExNeo.Interface {
         public static bool IsAwaitingInput { get; set; }
 
         /// <summary>
-        /// Terminal functionality handler
-        /// </summary>
-        private static TerminalHandler Handler { get; set; }
-
-        /// <summary>
         /// Static class constructor
         /// </summary>
         static Terminal() {
             IsAwaitingInput = false;
             Theme.Apply();
-            Handler = new TerminalHandler(Program.Config);
         }
 
         /// <summary>
@@ -41,7 +35,7 @@ namespace ScriptExNeo.Interface {
             // Begin terminal input output loop
             while (true) {
                 ReadInput();
-                Debug.WriteDump(Handler.ParseCommands(Input));
+                Debug.WriteDump(TerminalParser.ParseCommands(Input, TerminalMode.ActiveModeConfig));
             }
         }
 

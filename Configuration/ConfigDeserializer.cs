@@ -11,7 +11,7 @@ namespace ScriptExNeo.Configuration {
     /// <summary>
     /// Convert yaml file into configuration object
     /// </summary>
-    static class Deserializer {
+    static class ConfigDeserializer {
         public static Config Deserialize(string path) {
             try {
                 var _input = new StreamReader(path);

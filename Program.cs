@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ScriptExNeo.Interface;
-using ScriptExNeo.Interface.Page;
+using ScriptExNeo.Interface.Pages;
 using ScriptExNeo.Interface.Shelleton;
 using ScriptExNeo.Tools;
 using ScriptExNeo.Configuration;
@@ -20,17 +20,17 @@ namespace ScriptExNeo {
     class Program {
 
         // Program properties
-        public static string Version = "20.09.10";
-        public static string Copyright = "Haohan Liu (c) 2020";
-        public static string Name = "ScriptExNeo";
-        public static string MOTD = "Well would you look at that!";
+        public static readonly string Copyright = "Haohan Liu (c) 2020";
+        public static readonly string Version = "20.09.10";
+        public static readonly string Name = "ScriptExNeo";
+        public static readonly string MOTD = "Well would you look at that!";
 
         // Program configuration
-        public static string ConfigFile = "AppConfig.yml";
-        public static Config Config = Deserializer.Deserialize(ConfigFile);
+        public static readonly string ConfigFile = "AppConfig.yml";
+        public static readonly Config Config = ConfigDeserializer.Deserialize(ConfigFile);
 
         // Program logging
-        public static string LogFile = "ScriptExNeo.log";
+        public static readonly string LogFile = "ScriptExNeo.log";
         public static Log Log = new Log();
 
         static void Main(string[] args) {
